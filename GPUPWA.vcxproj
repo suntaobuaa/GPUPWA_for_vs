@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{251FE9B7-45FD-4D0A-8A5E-4B98BD798668}</ProjectGuid>
+    <RootNamespace>GPUPWA</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>NotSet</CharacterSet>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>NotSet</CharacterSet>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.26730.12</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>.;$(BROOKROOT)\sdk\include\;$(ROOTSYS)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\root\include;.;C:\Program Files %28x86%29\AMD APP SDK\2.9-1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>brook.lib;libCore.lib;libRIO.lib;libTree.lib;libMinuit2.lib;libHist.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\root\lib;C:\Program Files %28x86%29\AMD APP SDK\2.9-1\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Analysis.cpp" />
+    <ClCompile Include="Analysis_cpu.cpp" />
+    <ClCompile Include="Compiler.cpp" />
+    <ClCompile Include="Complex.cpp" />
+    <ClCompile Include="Complex_cpu.cpp" />
+    <ClCompile Include="ConfigFile.cpp" />
+    <ClCompile Include="Contractions.cpp" />
+    <ClCompile Include="Contractions_cpu.cpp" />
+    <ClCompile Include="DeviceInterface.cpp" />
+    <ClCompile Include="float44.cpp" />
+    <ClCompile Include="float444.cpp" />
+    <ClCompile Include="float4444.cpp" />
+    <ClCompile Include="GPUAntisymmetricTensor.cpp" />
+    <ClCompile Include="GPUBasicPropagator.cpp" />
+    <ClCompile Include="GPUChi2FitConstraint.cpp" />
+    <ClCompile Include="GPUChi2FrFitConstraint.cpp" />
+    <ClCompile Include="GPUComputedPropagator.cpp" />
+    <ClCompile Include="GPUComputedTensor.cpp" />
+    <ClCompile Include="GPUConstTensor.cpp" />
+    <ClCompile Include="GPUDataDependentObject.cpp" />
+    <ClCompile Include="GPUDataDependentObjectList.cpp" />
+    <ClCompile Include="GPUDataDependentObjectType.cpp" />
+    <ClCompile Include="GPUDataStream.cpp" />
+    <ClCompile Include="GPUDynamicalFunctionPVector.cpp" />
+    <ClCompile Include="GPUDynamicalSumBW.cpp" />
+    <ClCompile Include="GPUFactorizedPartialWave.cpp" />
+    <ClCompile Include="GPUFactorizedRadiativePartialWave.cpp" />
+    <ClCompile Include="GPUFileTable.cpp" />
+    <ClCompile Include="GPUFitConstraint.cpp" />
+    <ClCompile Include="GPUFitConstraintList.cpp" />
+    <ClCompile Include="GPUFumiliFCN.cpp" />
+    <ClCompile Include="GPUFumiliMinimize.cpp" />
+    <ClCompile Include="GPUGPerpStreamContainer.cpp" />
+    <ClCompile Include="GPUIndexStream.cpp" />
+    <ClCompile Include="GPULookupTable.cpp" />
+    <ClCompile Include="GPUMainMemoryLookupTable.cpp" />
+    <ClCompile Include="GPUMetricTensor.cpp" />
+    <ClCompile Include="GPUMinimizationHistory.cpp" />
+    <ClCompile Include="GPUMinosMinimizationHistory.cpp" />
+    <ClCompile Include="GPUMinuitFCN.cpp" />
+    <ClCompile Include="GPUOrbitalTensors.cpp" />
+    <ClCompile Include="GPUParameterDependentObject.cpp" />
+    <ClCompile Include="GPUPartialWave.cpp" />
+    <ClCompile Include="GPUPartialWaveAnalysis.cpp" />
+    <ClCompile Include="GPUPartialWaveLookupTable.cpp" />
+    <ClCompile Include="GPUPlotset.cpp" />
+    <ClCompile Include="GPUPropagator.cpp" />
+    <ClCompile Include="GPUPropagatorA980.cpp" />
+    <ClCompile Include="GPUPropagatorBreitWigner.cpp" />
+    <ClCompile Include="GPUPropagatorComBW.cpp" />
+    <ClCompile Include="GPUPropagatorDerivative.cpp" />
+    <ClCompile Include="GPUPropagatorFile.cpp" />
+    <ClCompile Include="GPUPropagatorFlatte2.cpp" />
+    <ClCompile Include="GPUPropagatorFlatte3.cpp" />
+    <ClCompile Include="GPUPropagatorFlatte4.cpp" />
+    <ClCompile Include="GPUPropagatorGaussian.cpp" />
+    <ClCompile Include="GPUPropagatorMassDependentBreitWigner.cpp" />
+    <ClCompile Include="GPUPropagatorSigma.cpp" />
+    <ClCompile Include="GPUPropagatorType.cpp" />
+    <ClCompile Include="GPUPWAAmplitudeCalculator.cpp" />
+    <ClCompile Include="GPUPWACalculator.cpp" />
+    <ClCompile Include="GPUPWAFreeCalculator.cpp" />
+    <ClCompile Include="GPURuncounter.cpp" />
+    <ClCompile Include="GPUSetOfPartialWaves.cpp" />
+    <ClCompile Include="GPUStreamDebug.cpp" />
+    <ClCompile Include="GPUStreamInputRootFileVector.cpp" />
+    <ClCompile Include="GPUStreamInputTextFileVector.cpp" />
+    <ClCompile Include="GPUStreamInputVector.cpp" />
+    <ClCompile Include="GPUStreamTensor.cpp" />
+    <ClCompile Include="GPUTensor.cpp" />
+    <ClCompile Include="GPUUnFactorizedPartialWave.cpp" />
+    <ClCompile Include="GPUUnFactorizedRadiativePartialWave.cpp" />
+    <ClCompile Include="KernelFile.cpp" />
+    <ClCompile Include="Makesumkernels.cpp" />
+    <ClCompile Include="MnFunctionCross2.cxx" />
+    <ClCompile Include="Orbitals.cpp" />
+    <ClCompile Include="Orbitals_cpu.cpp" />
+    <ClCompile Include="ParaCfg.cpp" />
+    <ClCompile Include="PrepareKernels.cpp" />
+    <ClCompile Include="Propagators.cpp" />
+    <ClCompile Include="Propagators_cpu.cpp" />
+    <ClCompile Include="ResCfg.cpp" />
+    <ClCompile Include="Stream.cpp" />
+    <ClCompile Include="Summing.cpp" />
+    <ClCompile Include="Summing_cpu.cpp" />
+    <ClCompile Include="Tensors.cpp" />
+    <ClCompile Include="Tensors_cpu.cpp" />
+    <ClCompile Include="vector_operators.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Analysis.h" />
+    <ClInclude Include="Analysis_cpu.h" />
+    <ClInclude Include="Complex.h" />
+    <ClInclude Include="Complex_cpu.h" />
+    <ClInclude Include="ConfigFile.h" />
+    <ClInclude Include="Contractions.h" />
+    <ClInclude Include="Contractions_cpu.h" />
+    <ClInclude Include="DeviceInterface.h" />
+    <ClInclude Include="FileCfg.h" />
+    <ClInclude Include="float44.h" />
+    <ClInclude Include="float444.h" />
+    <ClInclude Include="float4444.h" />
+    <ClInclude Include="GPUAntisymmetricTensor.h" />
+    <ClInclude Include="GPUBasicPropagator.h" />
+    <ClInclude Include="GPUChi2FitConstraint.h" />
+    <ClInclude Include="GPUChi2FrFitConstraint.h" />
+    <ClInclude Include="GPUComputedPropagator.h" />
+    <ClInclude Include="GPUComputedTensor.h" />
+    <ClInclude Include="GPUConstTensor.h" />
+    <ClInclude Include="GPUDataDependentObject.h" />
+    <ClInclude Include="GPUDataDependentObjectList.h" />
+    <ClInclude Include="GPUDataDependentObjectType.h" />
+    <ClInclude Include="GPUDataStream.h" />
+    <ClInclude Include="GPUDynamicalFunctionPVector.h" />
+    <ClInclude Include="GPUDynamicalSumBW.h" />
+    <ClInclude Include="GPUFactorizedPartialWave.h" />
+    <ClInclude Include="GPUFactorizedRadiativePartialWave.h" />
+    <ClInclude Include="GPUFileTable.h" />
+    <ClInclude Include="GPUFitConstraint.h" />
+    <ClInclude Include="GPUFitConstraintList.h" />
+    <ClInclude Include="GPUFumiliFCN.h" />
+    <ClInclude Include="GPUFumiliMinimize.h" />
+    <ClInclude Include="GPUGPerpStreamContainer.h" />
+    <ClInclude Include="GPUIndexStream.h" />
+    <ClInclude Include="GPULookupTable.h" />
+    <ClInclude Include="GPUMainMemoryLookupTable.h" />
+    <ClInclude Include="GPUMetricTensor.h" />
+    <ClInclude Include="GPUMinimizationHistory.h" />
+    <ClInclude Include="GPUMinosMinimizationHistory.h" />
+    <ClInclude Include="GPUMinuitFCN.h" />
+    <ClInclude Include="GPUOrbitalTensors.h" />
+    <ClInclude Include="GPUParameterDependentObject.h" />
+    <ClInclude Include="GPUPartialWave.h" />
+    <ClInclude Include="GPUPartialWaveAnalysis.h" />
+    <ClInclude Include="GPUPartialWaveLookupTable.h" />
+    <ClInclude Include="GPUPlotset.h" />
+    <ClInclude Include="GPUPropagator.h" />
+    <ClInclude Include="GPUPropagatorA980.h" />
+    <ClInclude Include="GPUPropagatorBreitWigner.h" />
+    <ClInclude Include="GPUPropagatorComBW.h" />
+    <ClInclude Include="GPUPropagatorDerivative.h" />
+    <ClInclude Include="GPUPropagatorFile.h" />
+    <ClInclude Include="GPUPropagatorFlatte2.h" />
+    <ClInclude Include="GPUPropagatorFlatte3.h" />
+    <ClInclude Include="GPUPropagatorFlatte4.h" />
+    <ClInclude Include="GPUPropagatorGaussian.h" />
+    <ClInclude Include="GPUPropagatorMassDependentBreitWigner.h" />
+    <ClInclude Include="GPUPropagatorSigma.h" />
+    <ClInclude Include="GPUPropagatorType.h" />
+    <ClInclude Include="GPUPWAAmplitudeCalculator.h" />
+    <ClInclude Include="GPUPWACalculator.h" />
+    <ClInclude Include="GPUPWAFreeCalculator.h" />
+    <ClInclude Include="GPURuncounter.h" />
+    <ClInclude Include="GPUSetOfPartialWaves.h" />
+    <ClInclude Include="GPUStreamInputRootFileVector.h" />
+    <ClInclude Include="GPUStreamInputTextFileVector.h" />
+    <ClInclude Include="GPUStreamInputVector.h" />
+    <ClInclude Include="GPUStreamTensor.h" />
+    <ClInclude Include="GPUTensor.h" />
+    <ClInclude Include="GPUUnFactorizedPartialWave.h" />
+    <ClInclude Include="GPUUnFactorizedRadiativePartialWave.h" />
+    <ClInclude Include="KernelFile.h" />
+    <ClInclude Include="MnFunctionCross2.h" />
+    <ClInclude Include="Orbitals.h" />
+    <ClInclude Include="Orbitals_cpu.h" />
+    <ClInclude Include="ParaCfg.h" />
+    <ClInclude Include="PrepareKernels.h" />
+    <ClInclude Include="Propagators.h" />
+    <ClInclude Include="Propagators_cpu.h" />
+    <ClInclude Include="ResCfg.h" />
+    <ClInclude Include="Status.h" />
+    <ClInclude Include="Stream.h" />
+    <ClInclude Include="Summing.h" />
+    <ClInclude Include="Summing_cpu.h" />
+    <ClInclude Include="Tensors.h" />
+    <ClInclude Include="Tensors_cpu.h" />
+    <ClInclude Include="unistd.h" />
+    <ClInclude Include="vector_operators.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
