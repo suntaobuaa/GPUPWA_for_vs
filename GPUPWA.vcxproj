@@ -24,7 +24,7 @@
     <WholeProgramOptimization>false</WholeProgramOptimization>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>NotSet</CharacterSet>
     <WholeProgramOptimization>false</WholeProgramOptimization>
@@ -54,7 +54,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>.;$(BROOKROOT)\sdk\include\;$(ROOTSYS)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;C:\root\include;C:\Program Files %28x86%29\AMD APP SDK\2.9-1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
@@ -63,6 +63,12 @@
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
     </ClCompile>
+    <ProjectReference>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+    </ProjectReference>
+    <Lib>
+      <AdditionalLibraryDirectories>C:\root\lib;C:\Program Files %28x86%29\AMD APP SDK\2.9-1\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -76,7 +82,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>brook.lib;libCore.lib;libRIO.lib;libTree.lib;libMinuit2.lib;libHist.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>OpenCL.lib;libCore.lib;libRIO.lib;libTree.lib;libGraf.lib;libGraf3d.lib;libRint.lib;libNet.lib;libPhysics.lib;libMatrix.lib;libCint.lib;libMinuit2.lib;libHist.lib;libThread.lib;libWin32gdk.lib;libSPlot.lib;libMathCore.lib;libFumili.lib;libGpad.lib;libPostscript.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\root\lib;C:\Program Files %28x86%29\AMD APP SDK\2.9-1\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
@@ -84,6 +90,9 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Analysis.cpp" />
@@ -150,7 +159,6 @@
     <ClCompile Include="GPUPWAFreeCalculator.cpp" />
     <ClCompile Include="GPURuncounter.cpp" />
     <ClCompile Include="GPUSetOfPartialWaves.cpp" />
-    <ClCompile Include="GPUStreamDebug.cpp" />
     <ClCompile Include="GPUStreamInputRootFileVector.cpp" />
     <ClCompile Include="GPUStreamInputTextFileVector.cpp" />
     <ClCompile Include="GPUStreamInputVector.cpp" />
@@ -159,7 +167,6 @@
     <ClCompile Include="GPUUnFactorizedPartialWave.cpp" />
     <ClCompile Include="GPUUnFactorizedRadiativePartialWave.cpp" />
     <ClCompile Include="KernelFile.cpp" />
-    <ClCompile Include="Makesumkernels.cpp" />
     <ClCompile Include="MnFunctionCross2.cxx" />
     <ClCompile Include="Orbitals.cpp" />
     <ClCompile Include="Orbitals_cpu.cpp" />

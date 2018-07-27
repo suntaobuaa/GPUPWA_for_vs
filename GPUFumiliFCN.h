@@ -19,11 +19,13 @@ public:
 	/// Destructor
 	virtual ~GPUFumiliFCN(void);
 	/// Call the GPUPWACalculator::GradientLikelihoodHessian() method and cache results
-	virtual void EvaluateConst(const std::vector<double> & par) const;
+	virtual void EvaluateConst(const std::vector<double> & par)  ;
+	//virtual void EvaluateConst(const std::vector<double> & par)const;
 	/// Call Evaluate const
 	virtual void EvaluateAll(const std::vector<double> & par);
 	/// Call evaluate const, return Likelihood
-	virtual double operator() (const std::vector<double> & par)const;
+	virtual double operator() (const std::vector<double> & par);
+	virtual double operator() (const std::vector<double> & par) const;
 	/// "One sigma", 0.5 for Log Likelihood
 	virtual double Up() const {return 0.5;}; // Log Likelihood!
 protected:

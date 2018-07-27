@@ -17,13 +17,29 @@ void GPUFumiliFCN::EvaluateAll(const std::vector<double> & par){
 }
 
 
-void GPUFumiliFCN::EvaluateConst(const std::vector<double> & par) const{
-	fValue = mCalc->LikelihoodGradientHessian(par,fGradient, fHessian);
+void GPUFumiliFCN::EvaluateConst(const std::vector<double> & par)  {
+	double fuck;
+	vector<double> your = Gradient();
+	vector<double> mother=  Hessian();
+	fuck = mCalc->LikelihoodGradientHessian(par, your, mother);
+//	fValue = mCalc->LikelihoodGradientHessian(par, fGradient, fHessian);
+	SetFCNValue(fuck);
+
 
 }
 
-double GPUFumiliFCN::operator() (const vector<double> & x) const{
+double GPUFumiliFCN::operator() (const vector<double> & x) 
+{
 	EvaluateConst(x);
 	//cout <<" fValue in GPUFumiliFCN::operator() "<<fValue<< endl;
-	return fValue;
+	//return fValue;
+	return Value();
+}
+
+double GPUFumiliFCN::operator() (const vector<double> & x) const 
+{
+	//EvaluateConst(x);
+	//cout <<" fValue in GPUFumiliFCN::operator() "<<fValue<< endl;
+	//return fValue;
+	return Value();
 }

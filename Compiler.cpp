@@ -69,13 +69,16 @@ int main(int argc, char* argv[]){
 	char * pathend = argv[2];
 	char * xpos =argv[2];
 	while((xpos = strstr(pathend, "/")))
-	  pathend = xpos+1;
+	  pathend = xpos+1;  //最终文件名
 	
 	unsigned  int length = suffix - pathend;//argv[2];
 	assert(length > 0);
-	char name[length+1];
+	//string name = pathend;
+	//char name[length+1];
+	char *name = (char*)malloc((length + 1)*sizeof(char));
 	strncpy(name, pathend,length);
 	name[length] ='\0';
+
 	cout << "Compiling and interfacing kernels in " << name << ".cl";
 	if(devtype == 1)
 		cout << " for the GPU" << endl;
@@ -165,8 +168,9 @@ int main(int argc, char* argv[]){
 	buffers[0] = binary;
 	for(unsigned int i=1; i < svec.size(); i++)
 	buffers[i] = 0;*/
-
-	char * buffers[svec.size()];
+	char **buffers = (char**)malloc(sizeof(char*)*(svec.size()));
+	//char * buffers[svec.size()];
+	//char* buffers = (char*)malloc(svec.size() * sizeof(char));
 	for(unsigned int i=0; i < svec.size(); i++)
 	  buffers[i] = new char[svec[i]];
 
@@ -174,8 +178,8 @@ int main(int argc, char* argv[]){
 	err = clGetProgramInfo((*pProgram)(), CL_PROGRAM_BINARIES, sizeof(buffers), &buffers, NULL);
 
 	char * binary = buffers[0];
-	
-	char binfilename[length+8+9];
+	char*binfilename = (char*)((length + 8+9) * sizeof(char));
+	//char binfilename[length+8+9];
 	if(devtype == 1)
 		sprintf(binfilename,"binfiles/%s.bin",name);
 	else
@@ -192,7 +196,8 @@ int main(int argc, char* argv[]){
 	cout << "Wrote " << binfilename << endl;
 
 	// Create the .h and .cpp files
-	char hfilename[length+6];
+	char*hfilename = (char*)((length + 6) * sizeof(char));
+	//char hfilename[length+6];
 	if(devtype ==1)
 		sprintf(hfilename,"%s.h",name);
 	else
@@ -202,8 +207,8 @@ int main(int argc, char* argv[]){
 		cerr << "Could not open " << hfilename << " for writing, aborting!" << endl;
 		return FAILURE;
 	}
-
-	char cfilename[length+8];
+	char*cfilename = (char*)((length + 8) * sizeof(char));
+	//char cfilename[length+8];
 	if(devtype ==1)
 		sprintf(cfilename,"%s.cpp",name);
 	else
@@ -482,5 +487,12 @@ int main(int argc, char* argv[]){
 	fclose(headerfile);
 	fclose(sourcefile);
 
+
+	///////////////////////////////////////////////////////
+	free(name);
+	free(buffers);
+	free(hfilename);
+	free(cfilename);
+	free(binfilename);
 	return SUCCESS;
 }

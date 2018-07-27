@@ -350,7 +350,9 @@ double GPUPWAAmplitudeCalculator::LikelihoodGradientHessianCalc(const vector<dou
   // Calculate gradient
   if(dogradient || dohessian){
 	  GPUDataStream<float4> * gradients = 0;
-	  float dtcstemp[mpsize];
+	  //   vector<float>dtcstemp(mpsize);
+	  float* dtcstemp = (float*)malloc(mpsize * sizeof(float));
+	//  float dtcstemp[mpsize];
 	  // Get DCS derivatives
 	  for(int i =0; i < mpsize; i++){
 		  if(!(mAna->GetParameters()->Parameter(i).IsFixed())){
@@ -363,7 +365,7 @@ double GPUPWAAmplitudeCalculator::LikelihoodGradientHessianCalc(const vector<dou
 	  mdtcs->Write(dtcstemp);
 //	  cout << "dTCS" << endl;
 //	  mdtcs->print();
-
+	  free(dtcstemp);
 	  // Zero the gradient vector
 	  for(int i =0; i < mpsize; i++){
 		  gradient.push_back(0);

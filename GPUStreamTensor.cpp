@@ -1,6 +1,7 @@
 #include "GPUStreamTensor.h"
 #include <cassert>
 #include <iostream>
+#include<vector>
 
 //#define _CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES 1
 //#define _CRT_SECURE_NO_DEPRECATE 1
@@ -345,7 +346,8 @@ vector<TH1F*> GPUStreamScalar::Plot(char * id, char * title,
 		Reset(dataindex,block);
 	}
 
-	TH1F * mchistx[nwaves+2];
+	//TH1F * mchistx[nwaves+2];
+	vector<TH1F*>mchistx(nwaves + 2);
 	if(nwaves){
 		for(int j = 1; j < nwaves+2; j++){
 			if(j == 1){
@@ -359,7 +361,8 @@ vector<TH1F*> GPUStreamScalar::Plot(char * id, char * title,
 		}
 	}
 
-	TH1F * mchistxx[nwaves+2][nwaves+2];
+	//TH1F * mchistxx[nwaves+2][nwaves+2];
+	vector<vector<TH1F*>>mchistxx;
 	if(nwaves && dooffdiagonal){
 	  //int index = nwaves+2;
 		for(int j = 2; j < nwaves+2; j++){
@@ -535,7 +538,8 @@ vector<TH2F*> GPUStreamScalar::Plot(char * id, // Histogram ID for Root
 		yvar.Reset(dataindex, block);
 	}
 
-	TH2F * mchistx[nwaves+2];
+	//TH2F * mchistx[nwaves+2];
+	vector<TH2F*>mchistx(nwaves + 2);
 	if(nwaves){
 		for(int j = 1; j < nwaves+2; j++){
 			if(j == 1){
@@ -549,7 +553,8 @@ vector<TH2F*> GPUStreamScalar::Plot(char * id, // Histogram ID for Root
 		}
 	}
 
-	TH2F * mchistxx[nwaves+2][nwaves+2];
+	//TH2F * mchistxx[nwaves+2][nwaves+2];
+	vector<vector<TH2F*>>mchistxx;
 	if(nwaves && dooffdiagonal){
 	  //int index = nwaves+2;
 		for(int j = 2; j < nwaves+2; j++){

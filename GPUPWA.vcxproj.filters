@@ -87,9 +87,6 @@
     <ClCompile Include="GPUSetOfPartialWaves.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GPUStreamDebug.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GPUStreamInputRootFileVector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -247,9 +244,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="KernelFile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Makesumkernels.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Orbitals.cpp">
