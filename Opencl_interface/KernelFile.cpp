@@ -3,7 +3,7 @@
 #include <iostream>
 #include <cstring>
 #include <cstdlib>
-#include <unistd.h>
+#include "../unistd.h"
 #include <cassert>
 
 #define GETCWD ::getcwd

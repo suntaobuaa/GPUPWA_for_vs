@@ -9,10 +9,11 @@
 #define STREAM_H_
 
 
-#include <tr1/memory> // used for the shared_ptr
+#include <memory> // used for the shared_ptr
 #include <CL/cl.hpp>
 #include "../float44.h"
 #include "../float444.h"
+
 
 class DeviceInterface;
 class cl::Buffer;
