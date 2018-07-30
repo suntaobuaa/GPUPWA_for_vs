@@ -1,5 +1,5 @@
 /* Contractions.h  -- source for interface functions to the kernels
- defined in /home/xiongxa/gpu_example/GPUPWA/Contractions.cl, the corresponding binaries are in binfiles/Contractions.bin
+ defined in Contractions.cl, the corresponding binaries are in binfiles/Contractions.bin
  THIS IS AN AUTO-GENERATED FILE, DO NOT EDIT */
 
 #include"Contractions.h"

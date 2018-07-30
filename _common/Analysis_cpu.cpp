@@ -1,5 +1,5 @@
 /* Analysis_cpu.h  -- source for interface functions to the kernels
- defined in /besfs/groups/psip/psipgroup/user/xiongxa/GamEtaPi0Pi0/Alg_gg_xl/GPUPWA/gpupwa2.1_1/GPUPWA/Analysis.cl, the corresponding binaries are in binfiles/Analysis_cpu.bin
+ defined in Analysis.cl, the corresponding binaries are in binfiles/Analysis_cpu.bin
  THIS IS AN AUTO-GENERATED FILE, DO NOT EDIT */
 
 #include"Analysis_cpu.h"
@@ -232,7 +232,7 @@ namespace Analysis_CPU{
 
 
 
-	 int pwamult4(const cl::NDRange & range, const DeviceInterface * dev, Stream<float4> * weight, Stream<float4> * lookupx, Stream<float4> * lookupy, Stream<float2> * parameters, uint n, float bgpar, float tcs, Stream<float4> * dcs, Stream<float4> * logdcs){
+	 int pwamult4(const DeviceInterface * dev, Stream<float4> * weight, Stream<float4> * lookupx, Stream<float4> * lookupy, Stream<float2> * parameters, uint n, float bgpar, float tcs, Stream<float4> * dcs, Stream<float4> * logdcs){
 
 		 cl_int err;
 		 std::vector<cl::Event> *evvec = new std::vector<cl::Event>();
@@ -308,7 +308,7 @@ namespace Analysis_CPU{
 			 return FAILURE;
 		 }
 
-		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_pwamult4, cl::NullRange, range, cl::NullRange, evvec, &event );
+		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_pwamult4, cl::NullRange, cl::NDRange(weight->GetD1(),weight->GetD2()), cl::NullRange, evvec, &event );
 		 if (err != CL_SUCCESS) {
 			 std::cerr << "CommandQueue::enqueueNDRangeKernel() failed (" << err << ")\n";
 			 assert(0);
@@ -323,7 +323,7 @@ namespace Analysis_CPU{
 	 return 0;
 	 }
 
-	 int collectpropagators4(const cl::NDRange & range, const DeviceInterface * dev, Stream<float2> * propagator, uint nwave, uint waveindex, Stream<float4> * prop){
+	 int collectpropagators4(const DeviceInterface * dev, Stream<float2> * propagator, uint nwave, uint waveindex, Stream<float4> * prop){
 
 		 cl_int err;
 		 std::vector<cl::Event> *evvec = new std::vector<cl::Event>();
@@ -358,7 +358,7 @@ namespace Analysis_CPU{
 			 return FAILURE;
 		 }
 
-		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_collectpropagators4, cl::NullRange, range, cl::NullRange, evvec, &event );
+		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_collectpropagators4, cl::NullRange, cl::NDRange(propagator->GetD1(),propagator->GetD2()), cl::NullRange, evvec, &event );
 		 if (err != CL_SUCCESS) {
 			 std::cerr << "CommandQueue::enqueueNDRangeKernel() failed (" << err << ")\n";
 			 assert(0);
@@ -371,7 +371,7 @@ namespace Analysis_CPU{
 	 return 0;
 	 }
 
-	 int freepwamult4(const cl::NDRange & range, const DeviceInterface * dev, Stream<float4> * weight, Stream<float4> * lookup, Stream<float4> * propagator, Stream<float2> * parameters, uint n, float bgpar, float tcs, Stream<float4> * dcs, Stream<float4> * logdcs){
+	 int freepwamult4(const DeviceInterface * dev, Stream<float4> * weight, Stream<float4> * lookup, Stream<float4> * propagator, Stream<float2> * parameters, uint n, float bgpar, float tcs, Stream<float4> * dcs, Stream<float4> * logdcs){
 
 		 cl_int err;
 		 std::vector<cl::Event> *evvec = new std::vector<cl::Event>();
@@ -447,7 +447,7 @@ namespace Analysis_CPU{
 			 return FAILURE;
 		 }
 
-		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_freepwamult4, cl::NullRange, range, cl::NullRange, evvec, &event );
+		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_freepwamult4, cl::NullRange, cl::NDRange(weight->GetD1(),weight->GetD2()), cl::NullRange, evvec, &event );
 		 if (err != CL_SUCCESS) {
 			 std::cerr << "CommandQueue::enqueueNDRangeKernel() failed (" << err << ")\n";
 			 assert(0);
@@ -462,7 +462,7 @@ namespace Analysis_CPU{
 	 return 0;
 	 }
 
-	 int freepwamult4tcs(const cl::NDRange & range, const DeviceInterface * dev, Stream<float4> * lookup, Stream<float4> * propagator, Stream<float2> * parameters, uint n, Stream<float4> * dcs){
+	 int freepwamult4tcs(const DeviceInterface * dev, Stream<float4> * lookup, Stream<float4> * propagator, Stream<float2> * parameters, uint n, Stream<float4> * dcs){
 
 		 cl_int err;
 		 std::vector<cl::Event> *evvec = new std::vector<cl::Event>();
@@ -507,7 +507,7 @@ namespace Analysis_CPU{
 			 return FAILURE;
 		 }
 
-		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_freepwamult4tcs, cl::NullRange, range, cl::NullRange, evvec, &event );
+		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_freepwamult4tcs, cl::NullRange, cl::NDRange(lookup->GetD1(),lookup->GetD2()), cl::NullRange, evvec, &event );
 		 if (err != CL_SUCCESS) {
 			 std::cerr << "CommandQueue::enqueueNDRangeKernel() failed (" << err << ")\n";
 			 assert(0);
@@ -520,7 +520,7 @@ namespace Analysis_CPU{
 	 return 0;
 	 }
 
-	 int freepwamult4tcsweighted(const cl::NDRange & range, const DeviceInterface * dev, Stream<float4> * weights, Stream<float4> * lookup, Stream<float4> * propagator, Stream<float2> * parameters, uint n, Stream<float4> * dcs){
+	 int freepwamult4tcsweighted(const DeviceInterface * dev, Stream<float4> * weights, Stream<float4> * lookup, Stream<float4> * propagator, Stream<float2> * parameters, uint n, Stream<float4> * dcs){
 
 		 cl_int err;
 		 std::vector<cl::Event> *evvec = new std::vector<cl::Event>();
@@ -575,7 +575,7 @@ namespace Analysis_CPU{
 			 return FAILURE;
 		 }
 
-		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_freepwamult4tcsweighted, cl::NullRange, range, cl::NullRange, evvec, &event );
+		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_freepwamult4tcsweighted, cl::NullRange, cl::NDRange(weights->GetD1(),weights->GetD2()), cl::NullRange, evvec, &event );
 		 if (err != CL_SUCCESS) {
 			 std::cerr << "CommandQueue::enqueueNDRangeKernel() failed (" << err << ")\n";
 			 assert(0);
@@ -588,7 +588,7 @@ namespace Analysis_CPU{
 	 return 0;
 	 }
 
-	 int pwagradmult4all(const cl::NDRange & range, const DeviceInterface * dev, Stream<int> * input, Stream<float4> * weightin, Stream<float4> * dcsin, Stream<float4> * lookupx, Stream<float4> * lookupy, Stream<float2> * parameters, uint nwaves, uint ngrads, Stream<float> * gradpar, float bgpar, float tcs, Stream<float> * dtcsin, Stream<float4> * grad, Stream<float4> * innergrad){
+	 int pwagradmult4all(const DeviceInterface * dev, Stream<int> * input, Stream<float4> * weightin, Stream<float4> * dcsin, Stream<float4> * lookupx, Stream<float4> * lookupy, Stream<float2> * parameters, uint nwaves, uint ngrads, Stream<float> * gradpar, float bgpar, float tcs, Stream<float> * dtcsin, Stream<float4> * grad, Stream<float4> * innergrad){
 
 		 cl_int err;
 		 std::vector<cl::Event> *evvec = new std::vector<cl::Event>();
@@ -707,7 +707,7 @@ namespace Analysis_CPU{
 			 return FAILURE;
 		 }
 
-		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_pwagradmult4all, cl::NullRange, range, cl::NullRange, evvec, &event );
+		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_pwagradmult4all, cl::NullRange, cl::NDRange(input->GetD1(),input->GetD2()), cl::NullRange, evvec, &event );
 		 if (err != CL_SUCCESS) {
 			 std::cerr << "CommandQueue::enqueueNDRangeKernel() failed (" << err << ")\n";
 			 assert(0);
@@ -722,7 +722,7 @@ namespace Analysis_CPU{
 	 return 0;
 	 }
 
-	 int kernelhessian(const cl::NDRange & range, const DeviceInterface * dev, Stream<float> * gradient1, Stream<float> * gradient2, Stream<float> * dcs, Stream<float> * weight, float bgpar, float tcs, Stream<float> * hessian){
+	 int kernelhessian(const DeviceInterface * dev, Stream<float> * gradient1, Stream<float> * gradient2, Stream<float> * dcs, Stream<float> * weight, float bgpar, float tcs, Stream<float> * hessian){
 
 		 cl_int err;
 		 std::vector<cl::Event> *evvec = new std::vector<cl::Event>();
@@ -787,7 +787,7 @@ namespace Analysis_CPU{
 			 return FAILURE;
 		 }
 
-		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_kernelhessian, cl::NullRange, range, cl::NullRange, evvec, &event );
+		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_kernelhessian, cl::NullRange, cl::NDRange(gradient1->GetD1(),gradient1->GetD2()), cl::NullRange, evvec, &event );
 		 if (err != CL_SUCCESS) {
 			 std::cerr << "CommandQueue::enqueueNDRangeKernel() failed (" << err << ")\n";
 			 assert(0);
@@ -800,7 +800,7 @@ namespace Analysis_CPU{
 	 return 0;
 	 }
 
-	 int kernelhessian4all(const cl::NDRange & range, const DeviceInterface * dev, Stream<float4> * gradients, Stream<float4> * dcs, Stream<float4> * weight, uint ngrad, float bgpar, float tcs, Stream<float4> * hessian){
+	 int kernelhessian4all(const DeviceInterface * dev, Stream<float4> * gradients, Stream<float4> * dcs, Stream<float4> * weight, uint ngrad, float bgpar, float tcs, Stream<float4> * hessian){
 
 		 cl_int err;
 		 std::vector<cl::Event> *evvec = new std::vector<cl::Event>();
@@ -861,7 +861,7 @@ namespace Analysis_CPU{
 			 return FAILURE;
 		 }
 
-		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_kernelhessian4all, cl::NullRange, range, cl::NullRange, evvec, &event );
+		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_kernelhessian4all, cl::NullRange, cl::NDRange(gradients->GetD1(),gradients->GetD2()), cl::NullRange, evvec, &event );
 		 if (err != CL_SUCCESS) {
 			 std::cerr << "CommandQueue::enqueueNDRangeKernel() failed (" << err << ")\n";
 			 assert(0);
@@ -874,7 +874,7 @@ namespace Analysis_CPU{
 	 return 0;
 	 }
 
-	 int pwamultdcsonly4(const cl::NDRange & range, const DeviceInterface * dev, Stream<float4> * lookupx, Stream<float4> * lookupy, Stream<float2> * parameters, uint n, float bgpar, Stream<float4> * dcs){
+	 int pwamultdcsonly4(const DeviceInterface * dev, Stream<float4> * lookupx, Stream<float4> * lookupy, Stream<float2> * parameters, uint n, float bgpar, Stream<float4> * dcs){
 
 		 cl_int err;
 		 std::vector<cl::Event> *evvec = new std::vector<cl::Event>();
@@ -926,7 +926,7 @@ namespace Analysis_CPU{
 			 return FAILURE;
 		 }
 
-		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_pwamultdcsonly4, cl::NullRange, range, cl::NullRange, evvec, &event );
+		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_pwamultdcsonly4, cl::NullRange, cl::NDRange(lookupx->GetD1(),lookupx->GetD2()), cl::NullRange, evvec, &event );
 		 if (err != CL_SUCCESS) {
 			 std::cerr << "CommandQueue::enqueueNDRangeKernel() failed (" << err << ")\n";
 			 assert(0);
@@ -939,7 +939,7 @@ namespace Analysis_CPU{
 	 return 0;
 	 }
 
-	 int pwamultdcsonly4weighted(const cl::NDRange & range, const DeviceInterface * dev, Stream<float4> * lookupx, Stream<float4> * lookupy, Stream<float4> * weights, Stream<float2> * parameters, uint n, float bgpar, Stream<float4> * dcs){
+	 int pwamultdcsonly4weighted(const DeviceInterface * dev, Stream<float4> * lookupx, Stream<float4> * lookupy, Stream<float4> * weights, Stream<float2> * parameters, uint n, float bgpar, Stream<float4> * dcs){
 
 		 cl_int err;
 		 std::vector<cl::Event> *evvec = new std::vector<cl::Event>();
@@ -1001,7 +1001,7 @@ namespace Analysis_CPU{
 			 return FAILURE;
 		 }
 
-		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_pwamultdcsonly4weighted, cl::NullRange, range, cl::NullRange, evvec, &event );
+		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_pwamultdcsonly4weighted, cl::NullRange, cl::NDRange(lookupx->GetD1(),lookupx->GetD2()), cl::NullRange, evvec, &event );
 		 if (err != CL_SUCCESS) {
 			 std::cerr << "CommandQueue::enqueueNDRangeKernel() failed (" << err << ")\n";
 			 assert(0);
@@ -1014,7 +1014,7 @@ namespace Analysis_CPU{
 	 return 0;
 	 }
 
-	 int pwamultdcsonlyonewave4(const cl::NDRange & range, const DeviceInterface * dev, Stream<float4> * lookupx, Stream<float2> * parameters, uint n, uint wavenumber, Stream<float4> * dcs){
+	 int pwamultdcsonlyonewave4(const DeviceInterface * dev, Stream<float4> * lookupx, Stream<float2> * parameters, uint n, uint wavenumber, Stream<float4> * dcs){
 
 		 cl_int err;
 		 std::vector<cl::Event> *evvec = new std::vector<cl::Event>();
@@ -1057,7 +1057,7 @@ namespace Analysis_CPU{
 			 return FAILURE;
 		 }
 
-		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_pwamultdcsonlyonewave4, cl::NullRange, range, cl::NullRange, evvec, &event );
+		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_pwamultdcsonlyonewave4, cl::NullRange, cl::NDRange(lookupx->GetD1(),lookupx->GetD2()), cl::NullRange, evvec, &event );
 		 if (err != CL_SUCCESS) {
 			 std::cerr << "CommandQueue::enqueueNDRangeKernel() failed (" << err << ")\n";
 			 assert(0);
@@ -1070,7 +1070,7 @@ namespace Analysis_CPU{
 	 return 0;
 	 }
 
-	 int pwamultdcsonlytwowaves4(const cl::NDRange & range, const DeviceInterface * dev, Stream<float4> * lookupx, Stream<float4> * lookupy, Stream<float2> * parameters, uint n, uint wave1, uint wave2, Stream<float4> * dcs){
+	 int pwamultdcsonlytwowaves4(const DeviceInterface * dev, Stream<float4> * lookupx, Stream<float4> * lookupy, Stream<float2> * parameters, uint n, uint wave1, uint wave2, Stream<float4> * dcs){
 
 		 cl_int err;
 		 std::vector<cl::Event> *evvec = new std::vector<cl::Event>();
@@ -1129,7 +1129,7 @@ namespace Analysis_CPU{
 			 return FAILURE;
 		 }
 
-		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_pwamultdcsonlytwowaves4, cl::NullRange, range, cl::NullRange, evvec, &event );
+		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_pwamultdcsonlytwowaves4, cl::NullRange, cl::NDRange(lookupx->GetD1(),lookupx->GetD2()), cl::NullRange, evvec, &event );
 		 if (err != CL_SUCCESS) {
 			 std::cerr << "CommandQueue::enqueueNDRangeKernel() failed (" << err << ")\n";
 			 assert(0);
@@ -1142,7 +1142,7 @@ namespace Analysis_CPU{
 	 return 0;
 	 }
 
-	 int kernelmult_c_c_f(const cl::NDRange & range, const DeviceInterface * dev, Stream<float2> * c1, Stream<float2> * c2, Stream<float> * f, Stream<float2> * result){
+	 int kernelmult_c_c_f(const DeviceInterface * dev, Stream<float2> * c1, Stream<float2> * c2, Stream<float> * f, Stream<float2> * result){
 
 		 cl_int err;
 		 std::vector<cl::Event> *evvec = new std::vector<cl::Event>();
@@ -1180,7 +1180,7 @@ namespace Analysis_CPU{
 			 return FAILURE;
 		 }
 
-		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_kernelmult_c_c_f, cl::NullRange, range, cl::NullRange, evvec, &event );
+		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_kernelmult_c_c_f, cl::NullRange, cl::NDRange(c1->GetD1(),c1->GetD2()), cl::NullRange, evvec, &event );
 		 if (err != CL_SUCCESS) {
 			 std::cerr << "CommandQueue::enqueueNDRangeKernel() failed (" << err << ")\n";
 			 assert(0);
@@ -1193,7 +1193,7 @@ namespace Analysis_CPU{
 	 return 0;
 	 }
 
-	 int kernelmult_c_cbar_f(const cl::NDRange & range, const DeviceInterface * dev, Stream<float2> * c1, Stream<float2> * c2, Stream<float> * f, Stream<float2> * result){
+	 int kernelmult_c_cbar_f(const DeviceInterface * dev, Stream<float2> * c1, Stream<float2> * c2, Stream<float> * f, Stream<float2> * result){
 
 		 cl_int err;
 		 std::vector<cl::Event> *evvec = new std::vector<cl::Event>();
@@ -1231,7 +1231,7 @@ namespace Analysis_CPU{
 			 return FAILURE;
 		 }
 
-		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_kernelmult_c_cbar_f, cl::NullRange, range, cl::NullRange, evvec, &event );
+		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_kernelmult_c_cbar_f, cl::NullRange, cl::NDRange(c1->GetD1(),c1->GetD2()), cl::NullRange, evvec, &event );
 		 if (err != CL_SUCCESS) {
 			 std::cerr << "CommandQueue::enqueueNDRangeKernel() failed (" << err << ")\n";
 			 assert(0);
@@ -1244,7 +1244,7 @@ namespace Analysis_CPU{
 	 return 0;
 	 }
 
-	 int kernelmult_2c_cbar_f(const cl::NDRange & range, const DeviceInterface * dev, Stream<float2> * c1, Stream<float2> * c2, Stream<float> * f, double2 pprodd, Stream<float> * result){
+	 int kernelmult_2c_cbar_f(const DeviceInterface * dev, Stream<float2> * c1, Stream<float2> * c2, Stream<float> * f, double2 pprodd, Stream<float> * result){
 
 		 cl_int err;
 		 std::vector<cl::Event> *evvec = new std::vector<cl::Event>();
@@ -1289,7 +1289,7 @@ namespace Analysis_CPU{
 			 return FAILURE;
 		 }
 
-		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_kernelmult_2c_cbar_f, cl::NullRange, range, cl::NullRange, evvec, &event );
+		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_kernelmult_2c_cbar_f, cl::NullRange, cl::NDRange(c1->GetD1(),c1->GetD2()), cl::NullRange, evvec, &event );
 		 if (err != CL_SUCCESS) {
 			 std::cerr << "CommandQueue::enqueueNDRangeKernel() failed (" << err << ")\n";
 			 assert(0);
@@ -1302,7 +1302,7 @@ namespace Analysis_CPU{
 	 return 0;
 	 }
 
-	 int kernelmult_c2_f(const cl::NDRange & range, const DeviceInterface * dev, Stream<float2> * c1, Stream<float> * f, Stream<float> * result){
+	 int kernelmult_c2_f(const DeviceInterface * dev, Stream<float2> * c1, Stream<float> * f, Stream<float> * result){
 
 		 cl_int err;
 		 std::vector<cl::Event> *evvec = new std::vector<cl::Event>();
@@ -1331,7 +1331,7 @@ namespace Analysis_CPU{
 			 return FAILURE;
 		 }
 
-		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_kernelmult_c2_f, cl::NullRange, range, cl::NullRange, evvec, &event );
+		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_kernelmult_c2_f, cl::NullRange, cl::NDRange(c1->GetD1(),c1->GetD2()), cl::NullRange, evvec, &event );
 		 if (err != CL_SUCCESS) {
 			 std::cerr << "CommandQueue::enqueueNDRangeKernel() failed (" << err << ")\n";
 			 assert(0);
@@ -1344,7 +1344,7 @@ namespace Analysis_CPU{
 	 return 0;
 	 }
 
-	 int kernelsum16float2double(const cl::NDRange & range, const DeviceInterface * dev, Stream<float4> * input, Stream<double2> * result){
+	 int kernelsum16float2double(const DeviceInterface * dev, Stream<float4> * input, Stream<double2> * result){
 
 		 cl_int err;
 		 std::vector<cl::Event> *evvec = new std::vector<cl::Event>();
@@ -1365,7 +1365,7 @@ namespace Analysis_CPU{
 			 return FAILURE;
 		 }
 
-		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_kernelsum16float2double, cl::NullRange, range, cl::NullRange, evvec, &event );
+		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_kernelsum16float2double, cl::NullRange, cl::NDRange(input->GetD1(),input->GetD2()), cl::NullRange, evvec, &event );
 		 if (err != CL_SUCCESS) {
 			 std::cerr << "CommandQueue::enqueueNDRangeKernel() failed (" << err << ")\n";
 			 assert(0);
@@ -1378,7 +1378,7 @@ namespace Analysis_CPU{
 	 return 0;
 	 }
 
-	 int kernelsum16float2double2d(const cl::NDRange & range, const DeviceInterface * dev, Stream<float4> * input, uint n, Stream<double2> * result){
+	 int kernelsum16float2double2d(const DeviceInterface * dev, Stream<float4> * input, uint n, Stream<double2> * result){
 
 		 cl_int err;
 		 std::vector<cl::Event> *evvec = new std::vector<cl::Event>();
@@ -1406,7 +1406,7 @@ namespace Analysis_CPU{
 			 return FAILURE;
 		 }
 
-		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_kernelsum16float2double2d, cl::NullRange, range, cl::NullRange, evvec, &event );
+		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_kernelsum16float2double2d, cl::NullRange, cl::NDRange(input->GetD1(),input->GetD2()), cl::NullRange, evvec, &event );
 		 if (err != CL_SUCCESS) {
 			 std::cerr << "CommandQueue::enqueueNDRangeKernel() failed (" << err << ")\n";
 			 assert(0);
@@ -1419,7 +1419,7 @@ namespace Analysis_CPU{
 	 return 0;
 	 }
 
-	 int kernelweightedsumfloat2double(const cl::NDRange & range, const DeviceInterface * dev, Stream<float> * nin, Stream<float> * weights, Stream<float2> * input, Stream<double2> * result){
+	 int kernelweightedsumfloat2double(const DeviceInterface * dev, Stream<float> * nin, Stream<float> * weights, Stream<float2> * input, Stream<double2> * result){
 
 		 cl_int err;
 		 std::vector<cl::Event> *evvec = new std::vector<cl::Event>();
@@ -1457,7 +1457,7 @@ namespace Analysis_CPU{
 			 return FAILURE;
 		 }
 
-		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_kernelweightedsumfloat2double, cl::NullRange, range, cl::NullRange, evvec, &event );
+		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_kernelweightedsumfloat2double, cl::NullRange, cl::NDRange(nin->GetD1(),nin->GetD2()), cl::NullRange, evvec, &event );
 		 if (err != CL_SUCCESS) {
 			 std::cerr << "CommandQueue::enqueueNDRangeKernel() failed (" << err << ")\n";
 			 assert(0);
@@ -1470,7 +1470,7 @@ namespace Analysis_CPU{
 	 return 0;
 	 }
 
-	 int kernelsumfloat2double(const cl::NDRange & range, const DeviceInterface * dev, Stream<float> * nin, Stream<float2> * input, Stream<double2> * result){
+	 int kernelsumfloat2double(const DeviceInterface * dev, Stream<float> * nin, Stream<float2> * input, Stream<double2> * result){
 
 		 cl_int err;
 		 std::vector<cl::Event> *evvec = new std::vector<cl::Event>();
@@ -1499,7 +1499,7 @@ namespace Analysis_CPU{
 			 return FAILURE;
 		 }
 
-		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_kernelsumfloat2double, cl::NullRange, range, cl::NullRange, evvec, &event );
+		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_kernelsumfloat2double, cl::NullRange, cl::NDRange(nin->GetD1(),nin->GetD2()), cl::NullRange, evvec, &event );
 		 if (err != CL_SUCCESS) {
 			 std::cerr << "CommandQueue::enqueueNDRangeKernel() failed (" << err << ")\n";
 			 assert(0);
@@ -1512,7 +1512,7 @@ namespace Analysis_CPU{
 	 return 0;
 	 }
 
-	 int kernelsumdouble2double(const cl::NDRange & range, const DeviceInterface * dev, Stream<float> * nin, Stream<double2> * input, Stream<double2> * result){
+	 int kernelsumdouble2double(const DeviceInterface * dev, Stream<float> * nin, Stream<double2> * input, Stream<double2> * result){
 
 		 cl_int err;
 		 std::vector<cl::Event> *evvec = new std::vector<cl::Event>();
@@ -1541,7 +1541,7 @@ namespace Analysis_CPU{
 			 return FAILURE;
 		 }
 
-		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_kernelsumdouble2double, cl::NullRange, range, cl::NullRange, evvec, &event );
+		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_kernelsumdouble2double, cl::NullRange, cl::NDRange(nin->GetD1(),nin->GetD2()), cl::NullRange, evvec, &event );
 		 if (err != CL_SUCCESS) {
 			 std::cerr << "CommandQueue::enqueueNDRangeKernel() failed (" << err << ")\n";
 			 assert(0);
@@ -1554,7 +1554,7 @@ namespace Analysis_CPU{
 	 return 0;
 	 }
 
-	 int kernel4orbitaltensor(const cl::NDRange & range, const DeviceInterface * dev, Stream<float4> * rtin, uint i, uint j, Stream<float44> * delpin, Stream<float44> * result){
+	 int kernel4orbitaltensor(const DeviceInterface * dev, Stream<float4> * rtin, uint i, uint j, Stream<float44> * delpin, Stream<float44> * result){
 
 		 cl_int err;
 		 std::vector<cl::Event> *evvec = new std::vector<cl::Event>();
@@ -1597,7 +1597,7 @@ namespace Analysis_CPU{
 			 return FAILURE;
 		 }
 
-		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_kernel4orbitaltensor, cl::NullRange, range, cl::NullRange, evvec, &event );
+		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_kernel4orbitaltensor, cl::NullRange, cl::NDRange(rtin->GetD1(),rtin->GetD2()), cl::NullRange, evvec, &event );
 		 if (err != CL_SUCCESS) {
 			 std::cerr << "CommandQueue::enqueueNDRangeKernel() failed (" << err << ")\n";
 			 assert(0);
@@ -1610,7 +1610,7 @@ namespace Analysis_CPU{
 	 return 0;
 	 }
 
-	 int kernel4orbitaltensorconst(const cl::NDRange & range, const DeviceInterface * dev, Stream<float4> * rtin, uint i, uint j, float44 delp, Stream<float44> * result){
+	 int kernel4orbitaltensorconst(const DeviceInterface * dev, Stream<float4> * rtin, uint i, uint j, float44 delp, Stream<float44> * result){
 
 		 cl_int err;
 		 std::vector<cl::Event> *evvec = new std::vector<cl::Event>();
@@ -1652,7 +1652,7 @@ namespace Analysis_CPU{
 			 return FAILURE;
 		 }
 
-		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_kernel4orbitaltensorconst, cl::NullRange, range, cl::NullRange, evvec, &event );
+		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_kernel4orbitaltensorconst, cl::NullRange, cl::NDRange(rtin->GetD1(),rtin->GetD2()), cl::NullRange, evvec, &event );
 		 if (err != CL_SUCCESS) {
 			 std::cerr << "CommandQueue::enqueueNDRangeKernel() failed (" << err << ")\n";
 			 assert(0);
@@ -1665,7 +1665,7 @@ namespace Analysis_CPU{
 	 return 0;
 	 }
 
-	 int kernel3orbitaltensor(const cl::NDRange & range, const DeviceInterface * dev, Stream<float4> * rtin, Stream<float4> * pain, Stream<float444> * result){
+	 int kernel3orbitaltensor(const DeviceInterface * dev, Stream<float4> * rtin, Stream<float4> * pain, Stream<float444> * result){
 
 		 cl_int err;
 		 std::vector<cl::Event> *evvec = new std::vector<cl::Event>();
@@ -1695,7 +1695,7 @@ namespace Analysis_CPU{
 			 return FAILURE;
 		 }
 
-		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_kernel3orbitaltensor, cl::NullRange, range, cl::NullRange, evvec, &event );
+		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_kernel3orbitaltensor, cl::NullRange, cl::NDRange(rtin->GetD1(),rtin->GetD2()), cl::NullRange, evvec, &event );
 		 if (err != CL_SUCCESS) {
 			 std::cerr << "CommandQueue::enqueueNDRangeKernel() failed (" << err << ")\n";
 			 assert(0);
@@ -1708,7 +1708,7 @@ namespace Analysis_CPU{
 	 return 0;
 	 }
 
-	 int kernel3orbitaltensorconst(const cl::NDRange & range, const DeviceInterface * dev, Stream<float4> * rtin, float4 pa, Stream<float444> * result){
+	 int kernel3orbitaltensorconst(const DeviceInterface * dev, Stream<float4> * rtin, float4 pa, Stream<float444> * result){
 
 		 cl_int err;
 		 std::vector<cl::Event> *evvec = new std::vector<cl::Event>();
@@ -1736,7 +1736,7 @@ namespace Analysis_CPU{
 			 return FAILURE;
 		 }
 
-		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_kernel3orbitaltensorconst, cl::NullRange, range, cl::NullRange, evvec, &event );
+		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_kernel3orbitaltensorconst, cl::NullRange, cl::NDRange(rtin->GetD1(),rtin->GetD2()), cl::NullRange, evvec, &event );
 		 if (err != CL_SUCCESS) {
 			 std::cerr << "CommandQueue::enqueueNDRangeKernel() failed (" << err << ")\n";
 			 assert(0);
@@ -1749,7 +1749,7 @@ namespace Analysis_CPU{
 	 return 0;
 	 }
 
-	 int kernelfilllookup(const cl::NDRange & range, const DeviceInterface * dev, Stream<float2> * input, uint offset, uint ijindex, uint lookupsize, Stream<float4> * cx, Stream<float4> * cy){
+	 int kernelfilllookup(const DeviceInterface * dev, Stream<float2> * input, uint offset, uint ijindex, uint lookupsize, Stream<float4> * cx, Stream<float4> * cy){
 
 		 cl_int err;
 		 std::vector<cl::Event> *evvec = new std::vector<cl::Event>();
@@ -1798,7 +1798,7 @@ namespace Analysis_CPU{
 			 return FAILURE;
 		 }
 
-		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_kernelfilllookup, cl::NullRange, range, cl::NullRange, evvec, &event );
+		 err = dev->GetQueue()->enqueueNDRangeKernel(*k_kernelfilllookup, cl::NullRange, cl::NDRange(input->GetD1(),input->GetD2()), cl::NullRange, evvec, &event );
 		 if (err != CL_SUCCESS) {
 			 std::cerr << "CommandQueue::enqueueNDRangeKernel() failed (" << err << ")\n";
 			 assert(0);

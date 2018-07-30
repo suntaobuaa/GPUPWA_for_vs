@@ -78,6 +78,7 @@ STATUS DeviceInterface::init() {
 	for(j = mdevices.begin(); j != mdevices.end(); j++){
 
 		mqueues.push_back( cl::CommandQueue(*mcontext, *j, CL_QUEUE_OUT_OF_ORDER_EXEC_MODE_ENABLE, &err));
+		std::cout << "creat command success!" << std::endl;
 		if (err != CL_SUCCESS) {
 			std::cerr << "CommandQueue::CommandQueue() failed (" << err << ")\n";
 			return FAILURE;

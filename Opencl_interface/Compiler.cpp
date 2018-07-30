@@ -78,6 +78,8 @@ int main(int argc, char* argv[]){
 	char *name = (char*)malloc((length + 1)*sizeof(char));
 	strncpy(name, pathend,length);
 	name[length] ='\0';
+	printf("length is %d\n", length);
+	printf("cl_name is %s\n", name);
 
 	cout << "Compiling and interfacing kernels in " << name << ".cl";
 	if(devtype == 1)
@@ -127,7 +129,7 @@ int main(int argc, char* argv[]){
 	  //    cout << file.cleansource().data() << endl;
 
 		sources = new cl::Program::Sources(1, std::make_pair(file.cleansource().data(), file.cleansource().size()));
-		//	cout << "AMD" << endl;
+			cout << "AMD" << endl;
 	} else {
 	  //	cout << "NVIDIA" << endl;
 	//	cout << file.standardsource().data() << endl <<endl;
@@ -155,10 +157,21 @@ int main(int argc, char* argv[]){
 		return FAILURE;
 	}
 
-	vector<size_t> svec;
-	svec = pProgram->getInfo<CL_PROGRAM_BINARY_SIZES>();
-	assert(svec[0]);
+	//vector<size_t> svec;
+	
+	size_t sizesv;
+	//pProgram->getInfo(CL_PROGRAM_BINARY_SIZES, svec);
+	err = clGetProgramInfo((*pProgram)(), CL_PROGRAM_BINARY_SIZES, 0,NULL, &sizesv);
+	cout << err << endl;
+	size_t* svec = (size_t*)malloc(sizesv * sizeof(size_t));
+	err = clGetProgramInfo((*pProgram)(), CL_PROGRAM_BINARY_SIZES, sizesv, svec, NULL);
 
+	//cout << "getinfo" << err << endl;
+	//svec = pProgram->getInfo<CL_PROGRAM_BINARY_SIZES>();
+	cout << svec[0] << endl;
+	assert(svec[0]);
+	int svec_size = sizesv/sizeof(size_t);
+	cout << svec_size << endl;
 	//std::cout << svec.size() << std::endl;
 	//for(unsigned int i=0; i < svec.size(); i++)
 	// std::cout << svec[i] << std::endl;
@@ -168,17 +181,15 @@ int main(int argc, char* argv[]){
 	buffers[0] = binary;
 	for(unsigned int i=1; i < svec.size(); i++)
 	buffers[i] = 0;*/
-	char **buffers = (char**)malloc(sizeof(char*)*(svec.size()));
-	//char * buffers[svec.size()];
-	//char* buffers = (char*)malloc(svec.size() * sizeof(char));
-	for(unsigned int i=0; i < svec.size(); i++)
+	//char **buffers = (char**)malloc(sizeof(char*)*(svec_size));
+	char* buffers[1];
+	for(unsigned int i=0; i < svec_size; i++)
 	  buffers[i] = new char[svec[i]];
 
 	//std::cout << sizeof(buffers[0]) << std::endl;
 	err = clGetProgramInfo((*pProgram)(), CL_PROGRAM_BINARIES, sizeof(buffers), &buffers, NULL);
-
-	char * binary = buffers[0];
-	char*binfilename = (char*)((length + 8+9) * sizeof(char));
+	//char * binary = buffers[0];
+	char*binfilename = (char*)malloc((length + 8+9) * sizeof(char));
 	//char binfilename[length+8+9];
 	if(devtype == 1)
 		sprintf(binfilename,"binfiles/%s.bin",name);
@@ -189,14 +200,14 @@ int main(int argc, char* argv[]){
 		cerr << "Could not open " << binfilename << " for writing, aborting" << endl;
 		return FAILURE;
 	}
-	fwrite(binary, sizeof(char),size,output);
+	fwrite(buffers[0], sizeof(char),size,output);
 	fclose(output);
-	for(unsigned int i=0; i < svec.size(); i++)
+	for(unsigned int i=0; i < svec_size; i++)
 	  delete buffers[i];
 	cout << "Wrote " << binfilename << endl;
 
 	// Create the .h and .cpp files
-	char*hfilename = (char*)((length + 6) * sizeof(char));
+	char*hfilename = (char*)malloc((length + 6) * sizeof(char));
 	//char hfilename[length+6];
 	if(devtype ==1)
 		sprintf(hfilename,"%s.h",name);
@@ -207,7 +218,7 @@ int main(int argc, char* argv[]){
 		cerr << "Could not open " << hfilename << " for writing, aborting!" << endl;
 		return FAILURE;
 	}
-	char*cfilename = (char*)((length + 8) * sizeof(char));
+	char*cfilename = (char*)malloc((length + 8) * sizeof(char));
 	//char cfilename[length+8];
 	if(devtype ==1)
 		sprintf(cfilename,"%s.cpp",name);
@@ -490,9 +501,9 @@ int main(int argc, char* argv[]){
 
 	///////////////////////////////////////////////////////
 	free(name);
-	free(buffers);
 	free(hfilename);
 	free(cfilename);
 	free(binfilename);
+	free(svec);
 	return SUCCESS;
 }

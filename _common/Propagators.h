@@ -1,5 +1,5 @@
 /* Propagators.h  -- header for interface functions to the kernels
- defined in /home/xiongxa/gpu_example/GPUPWA/Propagators.cl, the corresponding binaries are in binfiles/Propagators.bin
+ defined in Propagators.cl, the corresponding binaries are in binfiles/Propagators.bin
  THIS IS AN AUTO-GENERATED FILE, DO NOT EDIT */
 
 #ifndef HHPropagators_GPUHH

@@ -1,5 +1,5 @@
 /* Propagators_cpu.h  -- source for interface functions to the kernels
- defined in /besfs/groups/psip/psipgroup/user/xiongxa/GamEtaPi0Pi0/Alg_gg_xl/GPUPWA/gpupwa2.1_1/GPUPWA/Propagators.cl, the corresponding binaries are in binfiles/Propagators_cpu.bin
+ defined in Propagators.cl, the corresponding binaries are in binfiles/Propagators_cpu.bin
  THIS IS AN AUTO-GENERATED FILE, DO NOT EDIT */
 
 #include"Propagators_cpu.h"

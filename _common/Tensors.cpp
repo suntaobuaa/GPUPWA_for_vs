@@ -1,5 +1,5 @@
 /* Tensors.h  -- source for interface functions to the kernels
- defined in /home/xiongxa/gpu_example/GPUPWA/Tensors.cl, the corresponding binaries are in binfiles/Tensors.bin
+ defined in Tensors.cl, the corresponding binaries are in binfiles/Tensors.bin
  THIS IS AN AUTO-GENERATED FILE, DO NOT EDIT */
 
 #include"Tensors.h"

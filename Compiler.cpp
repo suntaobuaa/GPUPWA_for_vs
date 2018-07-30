@@ -76,6 +76,8 @@ int main(int argc, char* argv[]){
 	//string name = pathend;
 	//char name[length+1];
 	char *name = (char*)malloc((length + 1)*sizeof(char));
+	printf("length is %d\n", length);
+	printf("cl_name is %s\n", name);
 	strncpy(name, pathend,length);
 	name[length] ='\0';
 
@@ -178,7 +180,7 @@ int main(int argc, char* argv[]){
 	err = clGetProgramInfo((*pProgram)(), CL_PROGRAM_BINARIES, sizeof(buffers), &buffers, NULL);
 
 	char * binary = buffers[0];
-	char*binfilename = (char*)((length + 8+9) * sizeof(char));
+	char*binfilename = (char*)malloc((length + 8+9) * sizeof(char));
 	//char binfilename[length+8+9];
 	if(devtype == 1)
 		sprintf(binfilename,"binfiles/%s.bin",name);
@@ -196,7 +198,7 @@ int main(int argc, char* argv[]){
 	cout << "Wrote " << binfilename << endl;
 
 	// Create the .h and .cpp files
-	char*hfilename = (char*)((length + 6) * sizeof(char));
+	char*hfilename = (char*)malloc((length + 6) * sizeof(char));
 	//char hfilename[length+6];
 	if(devtype ==1)
 		sprintf(hfilename,"%s.h",name);
@@ -207,7 +209,7 @@ int main(int argc, char* argv[]){
 		cerr << "Could not open " << hfilename << " for writing, aborting!" << endl;
 		return FAILURE;
 	}
-	char*cfilename = (char*)((length + 8) * sizeof(char));
+	char*cfilename = (char*)malloc((length + 8) * sizeof(char));
 	//char cfilename[length+8];
 	if(devtype ==1)
 		sprintf(cfilename,"%s.cpp",name);

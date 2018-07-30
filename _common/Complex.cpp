@@ -1,5 +1,5 @@
 /* Complex.h  -- source for interface functions to the kernels
- defined in /home/xiongxa/gpu_example/GPUPWA/Complex.cl, the corresponding binaries are in binfiles/Complex.bin
+ defined in Complex.cl, the corresponding binaries are in binfiles/Complex.bin
  THIS IS AN AUTO-GENERATED FILE, DO NOT EDIT */
 
 #include"Complex.h"
